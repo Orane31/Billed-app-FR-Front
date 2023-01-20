@@ -20,25 +20,42 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    const formData = new FormData()
-    const email = JSON.parse(localStorage.getItem("user")).email
-    formData.append('file', file)
-    formData.append('email', email)
+    // TODO : 
+      //  split extension = fileName.split(".")
+    //  let accepted extentions = [png, etc]
 
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true
-        }
-      })
-      .then(({fileUrl, key}) => {
-        console.log(fileUrl)
-        this.billId = key
-        this.fileUrl = fileUrl
-        this.fileName = fileName
-      }).catch(error => console.error(error))
+    // if accepted.includes extension ) {
+
+    // }
+
+    let fileExt = fileName.split(".")
+    console.log(fileExt)
+    let acceptedExtentions = ["png", "jpeg", "jpg"]
+    if (acceptedExtentions.includes(fileExt[1])) {
+      const formData = new FormData()
+      const email = JSON.parse(localStorage.getItem("user")).email
+      formData.append('file', file)
+      formData.append('email', email)
+      console.log(filePath, fileName)
+  
+      this.store
+        .bills()
+        .create({
+          data: formData,
+          headers: {
+            noContentType: true
+          }
+        })
+        .then(({fileUrl, key}) => {
+          console.log(fileUrl)
+          this.billId = key
+          this.fileUrl = fileUrl
+          this.fileName = fileName
+        }).catch(error => console.error(error))
+    } else {
+      this.document.querySelector(`input[data-testid="file"]`).value = ""
+    }
+
   }
   handleSubmit = e => {
     e.preventDefault()
