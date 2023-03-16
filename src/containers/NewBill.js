@@ -7,9 +7,9 @@ export default class NewBill {
     this.onNavigate = onNavigate
     this.store = store
     const formNewBill = this.document.querySelector(`form[data-testid="form-new-bill"]`)
-    formNewBill.addEventListener("submit", this.handleSubmit)
+    if (formNewBill) formNewBill.addEventListener("submit", this.handleSubmit)
     const file = this.document.querySelector(`input[data-testid="file"]`)
-    file.addEventListener("change", this.handleChangeFile)
+    if (file) file.addEventListener("change", this.handleChangeFile)
     this.fileUrl = null
     this.fileName = null
     this.billId = null
@@ -20,13 +20,6 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    // TODO : 
-      //  split extension = fileName.split(".")
-    //  let accepted extentions = [png, etc]
-
-    // if accepted.includes extension ) {
-
-    // }
 
     let fileString = fileName.split(".")
     let fileExt = fileString[fileString.length - 1]
@@ -38,7 +31,6 @@ export default class NewBill {
       formData.append('file', file)
       formData.append('email', email)
  
-  
       this.store
         .bills()
         .create({

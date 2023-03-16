@@ -42,6 +42,8 @@ describe("Given I am connected as an employee", () => {
     test("Modal should open on the right", () => {
       const html = BillsUI({ data: bills});
       document.body.innerHTML = html;
+      const modaleFile = document.getElementById("modaleFile");
+      $.fn.modal = jest.fn(() => modaleFile.classList.add("show"));
       const store = null;
       const billsList = new Bills({ document, onNavigate, store, localStorage: window.localStorage, });
       console.log(screen.getByTestId('tbody').getElementsByTagName('td')[0].textContent)
@@ -52,8 +54,7 @@ describe("Given I am connected as an employee", () => {
       icon.addEventListener('click', handleClickIconEye);
       fireEvent.click(icon);
       expect(handleClickIconEye).toHaveBeenCalled();
-      const modale = document.getElementById('modaleFile');
-      expect(modale).toBeTruthy();
+      expect(modaleFile).toBeTruthy();
     })
   })
 

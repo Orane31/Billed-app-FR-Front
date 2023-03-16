@@ -46,7 +46,6 @@ describe('Given I am connected as an Admin', () => {
       expect(screen.getAllByText('Erreur')).toBeTruthy()
     })
   })
-
   describe('When I am on Dashboard page and I click on arrow', () => {
     test('Then, tickets list should be unfolding, and cards should appear', async () => {
 
@@ -90,7 +89,6 @@ describe('Given I am connected as an Admin', () => {
       expect(screen.getByTestId(`open-billBeKy5Mo4jkmdfPGYpTxZ`)).toBeTruthy()
     })
   })
-
   describe('When I am on Dashboard page and I click on edit icon of a card', () => {
     test('Then, right form should be filled',  () => {
 
@@ -118,7 +116,6 @@ describe('Given I am connected as an Admin', () => {
       expect(screen.getByTestId(`dashboard-form`)).toBeTruthy()
     })
   })
-
   describe('When I am on Dashboard page and I click 2 times on edit icon of a card', () => {
     test('Then, big bill Icon should Appear',  () => {
 
@@ -149,8 +146,6 @@ describe('Given I am connected as an Admin', () => {
       expect(bigBilledIcon).toBeTruthy()
     })
   })
-
-
   describe('When I am on Dashboard and there are no bills', () => {
     test('Then, no cards should be shown', () => {
       document.body.innerHTML = cards([])
@@ -240,7 +235,7 @@ describe('Given I am connected as Admin and I am on Dashboard page and I clicked
   })
 })
 
-// test d'intégration GET
+
 describe("Given I am a user connected as Admin", () => {
   describe("When I navigate to Dashboard", () => {
     test("fetches bills from mock API GET", async () => {
